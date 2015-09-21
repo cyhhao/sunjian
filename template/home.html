@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet"
+          href="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.0/angular-material.min.css">
+    <link rel="stylesheet" href="/static/css/default.css">
+</head>
+<body ng-app="app">
+
+<!--搜索框-->
+<div id="search" layout="row" layout-align="center center" style="width:100%;padding-top: 20px">
+    <div ng-controller="SearchCtrl as ctrl" flex="60">
+        <md-content class="md-padding">
+            <form ng-submit="$event.preventDefault()">
+                <md-autocomplete
+                        ng-disabled="ctrl.isDisabled"
+                        md-no-cache="ctrl.noCache"
+                        md-selected-item="ctrl.selectedItem"
+                        md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
+                        md-search-text="ctrl.searchText"
+                        md-selected-item-change="ctrl.selectedItemChange(item)"
+                        md-items="item in ctrl.querySearch(ctrl.searchText)"
+                        md-item-text="item.display"
+                        md-min-length="0"
+                        placeholder="搜些什么？">
+                    <md-item-template>
+                        <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{`item.display`}</span>
+                    </md-item-template>
+                    <md-not-found>
+                        No matches found for "{`ctrl.searchText`}".
+                    </md-not-found>
+                </md-autocomplete>
+            </form>
+        </md-content>
+    </div>
+</div>
+<!--End -- 搜索框-->
+<!--  正文  -->
+<div layout="row" layout-align="center center">
+    <div ng-controller="CardCtrl" flex="60">
+        <md-content class="md-padding">
+            <md-card>
+                <img ng-src="{`imagePath`}" class="md-card-image" alt="Washed Out">
+                <md-card-content>
+                    <h2 class="md-title">Paracosm</h2>
+
+                    <p>
+                        The titles of Washed Out's breakthrough song and the first single from Paracosm share the
+                        two most important words in Ernest Greene's musical language: feel it. It's a simple request, as
+                        well...
+                    </p>
+                </md-card-content>
+                <div class="md-actions" layout="row" layout-align="end center">
+                    <md-button>Action 1</md-button>
+                    <md-button>Action 2</md-button>
+                </div>
+            </md-card>
+            <br/>
+            <md-card>
+                <img ng-src="{`imagePath`}" class="md-card-image" alt="Washed Out">
+                <md-card-content>
+                    <h2 class="md-title">Paracosm</h2>
+
+                    <p>
+                        The titles of Washed Out's breakthrough song and the first single from Paracosm share the
+                        two most important words in Ernest Greene's musical language: feel it. It's a simple request, as
+                        well...
+                    </p>
+                </md-card-content>
+            </md-card>
+            <br/>
+            <md-card>
+                <img ng-src="{`imagePath`}" class="md-card-image" alt="Washed Out">
+                <md-card-content>
+                    <h2 class="md-title">Paracosm</h2>
+
+                    <p>
+                        The titles of Washed Out's breakthrough song and the first single from Paracosm share the
+                        two most important words in Ernest Greene's musical language: feel it. It's a simple request, as
+                        well...
+                    </p>
+                </md-card-content>
+            </md-card>
+        </md-content>
+    </div>
+</div>
+<!-- End 正文  -->
+
+<!--  FAB  -->
+
+
+<div id="fab" ng-controller="DemoCtrl as demo" layout="column" style="position: absolute;right: 10%;top:80%">
+    <md-content class="md-padding" layout="column">
+        <div class="lock-size" layout="row" layout-align="center center">
+            <md-fab-speed-dial md-open="demo.isOpen" md-direction="{`demo.selectedDirection`}"
+                               ng-class="demo.selectedMode">
+                <md-fab-trigger>
+                    <md-button aria-label="menu" class="md-fab md-warn">
+                        <md-icon md-svg-src="/static/img/icons/menu.svg"></md-icon>
+                    </md-button>
+                </md-fab-trigger>
+                <md-fab-actions>
+                    <md-button aria-label="Twitter" class="md-fab md-raised md-mini">
+                        <md-icon md-svg-src="/static/img/icons/twitter.svg" aria-label="Twitter"></md-icon>
+                    </md-button>
+                    <md-button aria-label="Facebook" class="md-fab md-raised md-mini">
+                        <md-icon md-svg-src="/static/img/icons/facebook.svg" aria-label="Facebook"></md-icon>
+                    </md-button>
+                    <md-button aria-label="Google Hangout" class="md-fab md-raised md-mini">
+                        <md-icon md-svg-src="/static/img/icons/hangout.svg" aria-label="Google Hangout"></md-icon>
+                    </md-button>
+                </md-fab-actions>
+            </md-fab-speed-dial>
+        </div>
+    </md-content>
+</div>
+
+
+<!-- End  FAB  -->
+
+<!--&lt;!&ndash; Angular Material Dependencies &ndash;&gt;-->
+<!--<script src="/static/js/angular.js"></script>-->
+<!--<script src="/static/js/angular-animate.js"></script>-->
+<!--<script src="/static/js/angular-aria.js"></script>-->
+
+<!--&lt;!&ndash; Angular Material Javascript using GitCDN to load directly from `bower-material/master` &ndash;&gt;-->
+<!--<script src="/static/js/angular-material.js"></script>-->
+
+<script src="/static/js/jquery-2.1.4.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-animate.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-aria.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-messages.min.js"></script>
+
+<!-- Angular Material Javascript now available via Google CDN; version 0.10 used here -->
+<script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.1/angular-material.min.js"></script>
+
+<script>
+    (function () {
+        angular.module('app', ['ngMaterial'])
+                .controller('SearchCtrl', SearchCtrl)
+                .controller('CardCtrl', CardCtrl)
+                .controller('DemoCtrl', DemoCtrl)
+                .config(function ($mdThemingProvider, $interpolateProvider) {
+                    $mdThemingProvider.theme('default')
+                            .primaryPalette('blue')
+                            .accentPalette('orange');
+                    $interpolateProvider.startSymbol('{`');
+                    $interpolateProvider.endSymbol('`}');
+                });
+        function SearchCtrl($timeout, $q, $log) {
+            var self = this;
+            self.simulateQuery = false;
+            self.isDisabled = false;
+            // list of `state` value/display objects
+            self.states = loadAll();
+            self.querySearch = querySearch;
+            self.selectedItemChange = selectedItemChange;
+            self.searchTextChange = searchTextChange;
+            // ******************************
+            // Internal methods
+            // ******************************
+            /**
+             * Search for states... use $timeout to simulate
+             * remote dataservice call.
+             */
+            function querySearch(query) {
+                var results = query ? self.states.filter(createFilterFor(query)) : self.states,
+                        deferred;
+                if (self.simulateQuery) {
+                    deferred = $q.defer();
+                    $timeout(function () {
+                        deferred.resolve(results);
+                    }, Math.random() * 1000, false);
+                    return deferred.promise;
+                } else {
+                    return results;
+                }
+            }
+
+            function searchTextChange(text) {
+                $log.info('Text changed to ' + text);
+            }
+
+            function selectedItemChange(item) {
+                $log.info('Item changed to ' + JSON.stringify(item));
+            }
+
+            /**
+             * Build `states` list of key/value pairs
+             */
+            function loadAll() {
+                var allStates = 'Alabama, Alaska, Arizona, Arkansas, California, Colorado, Connecticut, Delaware,\
+              Florida, Georgia, Hawaii, Idaho, Illinois, Indiana, Iowa, Kansas, Kentucky, Louisiana,\
+              Maine, Maryland, Massachusetts, Michigan, Minnesota, Mississippi, Missouri, Montana,\
+              Nebraska, Nevada, New Hampshire, New Jersey, New Mexico, New York, North Carolina,\
+              North Dakota, Ohio, Oklahoma, Oregon, Pennsylvania, Rhode Island, South Carolina,\
+              South Dakota, Tennessee, Texas, Utah, Vermont, Virginia, Washington, West Virginia,\
+              Wisconsin, Wyoming';
+                return allStates.split(/, +/g).map(function (state) {
+                    return {
+                        value: state.toLowerCase(),
+                        display: state
+                    };
+                });
+            }
+
+            /**
+             * Create filter function for a query string
+             */
+            function createFilterFor(query) {
+                var lowercaseQuery = angular.lowercase(query);
+                return function filterFn(state) {
+                    return (state.value.indexOf(lowercaseQuery) === 0);
+                };
+            }
+        }
+
+//        var contentNG = angular.module('content', ['ngMaterial']);
+//        contentNG.config(function ($mdThemingProvider, $interpolateProvider) {
+//            $mdThemingProvider.theme('default')
+//                    .primaryPalette('blue')
+//                    .accentPalette('orange');
+//            $interpolateProvider.startSymbol('{`');
+//            $interpolateProvider.endSymbol('`}');
+//        });
+        function CardCtrl($scope) {
+            $scope.imagePath = '/static/img/washedout.png';
+        }
+
+        function DemoCtrl() {
+//            this.topDirections = ['left', 'up'];
+//            this.bottomDirections = ['down', 'right'];
+            this.isOpen = false;
+//            this.availableModes = ['md-fling', 'md-scale'];
+            this.selectedMode = 'md-scale';
+//            this.availableDirections = ['up', 'down', 'left', 'right'];
+            this.selectedDirection = 'up';
+        }
+    })();
+
+</script>
+
+<script>
+    var tips;
+    var theTop = 20/*这是默认高度,越大越往下*/;
+    var old = theTop;
+    function initFloatTips() {
+        tips = document.getElementById('search');
+        moveTips();
+    }
+    function moveTips() {
+        var tt = 10;
+        if (window.innerHeight) {
+            pos = window.pageYOffset;
+        }
+        else if (document.documentElemen && document.documentElement.scrollTop) {
+            pos = document.documentElement.scrollTop;
+        }
+        else if (document.body) {
+            pos = document.body.scrollTop;
+        }
+        pos = pos - tips.offsetTop + theTop;
+        pos = tips.offsetTop + pos / 4;
+        if (pos < theTop) pos = theTop;
+        if (pos != old) {
+            tips.style.top = pos + "px";
+            tt = 10;
+        }
+        old = pos;
+        setTimeout(moveTips, tt);
+    }
+
+</script>
+</body>
+</html>

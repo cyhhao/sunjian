@@ -1,0 +1,65 @@
+/*滚动条样式*/
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(231, 231, 231, 0.8);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba(231, 231, 231, 0.4);
+}
+
+/*滚动条样式 end*/
+
+.fabSpeedDialdemoBasicUsage .text-capitalize {
+    text-transform: capitalize;
+}
+
+.fabSpeedDialdemoBasicUsage .md-fab:hover, .fabSpeedDialdemoBasicUsage .md-fab.md-focused {
+    background-color: #000 !important;
+}
+
+.fabSpeedDialdemoBasicUsage p.note {
+    font-size: 1.2rem;
+}
+
+.fabSpeedDialdemoBasicUsage .lock-size {
+    min-width: 300px;
+    min-height: 300px;
+    width: 300px;
+    height: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.fabToolbardemoBasicUsage md-fab-toolbar.md-left md-fab-trigger.align-with-text {
+    left: 7px;
+}
+
+.fabToolbar {
+}
+
+.fabToolbarButton {
+    padding-left: 30px;
+    padding-top: 30px;
+    height: 50px;
+    width: inherit;
+
+}
+
+.carddemoBasicUsage md-card {
+    min-height: 150px;
+}
