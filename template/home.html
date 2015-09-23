@@ -3,6 +3,7 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
+
     <link rel="stylesheet"
           href="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.0/angular-material.min.css">
     <link rel="stylesheet" href="/static/css/default.css">
@@ -42,19 +43,25 @@
     <div ng-controller="CardCtrl" flex="60">
         <md-content class="md-padding">
             <md-card>
-                <img ng-src="{`imagePath`}" class="md-card-image" alt="Washed Out">
                 <md-card-content>
-                    <h2 class="md-title">Paracosm</h2>
+                    <h2 class="md-title">php是世界上最好的语言？</h2>
 
                     <p>
-                        The titles of Washed Out's breakthrough song and the first single from Paracosm share the
-                        two most important words in Ernest Greene's musical language: feel it. It's a simple request, as
-                        well...
+                        不，我认为python才是世界上最好的语言。由于样式表可以是外部的，也可以是内部的，规则四提醒我们要注意外部样式表引入的顺序（及
+                        <link>
+                        元素的顺序），以及外部样式表与内部样式表的出现位置。一般来说，内部样式表出现在所有外部样式表的引入之后，一般是在之前。规则五：!important的样式属
                     </p>
                 </md-card-content>
-                <div class="md-actions" layout="row" layout-align="end center">
-                    <md-button>Action 1</md-button>
-                    <md-button>Action 2</md-button>
+                <div class="md-actions contentBtn" layout="row" layout-align="end center">
+                    <md-button>
+                        <md-icon md-svg-src="/static/img/icons/ic_visibility_24px.svg" class="fabItem"></md-icon>
+                        阅读
+                    </md-button>
+                    <md-button>
+                        <md-icon md-svg-src="/static/img/icons/ic_mode_edit_24px.svg" class="fabItem"></md-icon>
+                        编辑
+
+                    </md-button>
                 </div>
             </md-card>
             <br/>
@@ -91,25 +98,37 @@
 <!--  FAB  -->
 
 
-<div id="fab" ng-controller="DemoCtrl as demo" layout="column" style="position: absolute;right: 10%;top:80%">
+<div class="fab" id="fab" ng-controller="DemoCtrl as demo" layout="column">
     <md-content class="md-padding" layout="column">
         <div class="lock-size" layout="row" layout-align="center center">
             <md-fab-speed-dial md-open="demo.isOpen" md-direction="{`demo.selectedDirection`}"
                                ng-class="demo.selectedMode">
                 <md-fab-trigger>
-                    <md-button aria-label="menu" class="md-fab md-warn">
+                    <md-button aria-label="menu" class="md-fab md-warn" onDblClick="$('html,body').animate({scrollTop : '0px'}, 200);">
                         <md-icon md-svg-src="/static/img/icons/menu.svg"></md-icon>
+                        <md-tooltip>
+                            双击返回顶部
+                        </md-tooltip>
                     </md-button>
                 </md-fab-trigger>
                 <md-fab-actions>
                     <md-button aria-label="Twitter" class="md-fab md-raised md-mini">
-                        <md-icon md-svg-src="/static/img/icons/twitter.svg" aria-label="Twitter"></md-icon>
+                        <md-icon md-svg-src="/static/img/icons/twitter.svg" aria-label="Twitter"
+                                 class="fabItem"></md-icon>
+                        <md-tooltip>
+                            twitter
+                        </md-tooltip>
                     </md-button>
                     <md-button aria-label="Facebook" class="md-fab md-raised md-mini">
-                        <md-icon md-svg-src="/static/img/icons/facebook.svg" aria-label="Facebook"></md-icon>
+                        <md-icon md-svg-src="/static/img/icons/facebook.svg" aria-label="Facebook"
+                                 class="fabItem"></md-icon>
                     </md-button>
                     <md-button aria-label="Google Hangout" class="md-fab md-raised md-mini">
-                        <md-icon md-svg-src="/static/img/icons/hangout.svg" aria-label="Google Hangout"></md-icon>
+                        <md-icon md-svg-src="/static/img/icons/ic_add_circle_black_24px.svg" aria-label="添加文章"
+                                 class="fabItem"></md-icon>
+                        <md-tooltip>
+                            添加文章
+                        </md-tooltip>
                     </md-button>
                 </md-fab-actions>
             </md-fab-speed-dial>
@@ -228,7 +247,7 @@
 //            $interpolateProvider.endSymbol('`}');
 //        });
         function CardCtrl($scope) {
-            $scope.imagePath = '/static/img/washedout.png';
+            $scope.imagePath = '/static/img/286342.jpg';
         }
 
         function DemoCtrl() {
@@ -245,34 +264,6 @@
 </script>
 
 <script>
-    var tips;
-    var theTop = 20/*这是默认高度,越大越往下*/;
-    var old = theTop;
-    function initFloatTips() {
-        tips = document.getElementById('search');
-        moveTips();
-    }
-    function moveTips() {
-        var tt = 10;
-        if (window.innerHeight) {
-            pos = window.pageYOffset;
-        }
-        else if (document.documentElemen && document.documentElement.scrollTop) {
-            pos = document.documentElement.scrollTop;
-        }
-        else if (document.body) {
-            pos = document.body.scrollTop;
-        }
-        pos = pos - tips.offsetTop + theTop;
-        pos = tips.offsetTop + pos / 4;
-        if (pos < theTop) pos = theTop;
-        if (pos != old) {
-            tips.style.top = pos + "px";
-            tt = 10;
-        }
-        old = pos;
-        setTimeout(moveTips, tt);
-    }
 
 </script>
 </body>
