@@ -59,25 +59,33 @@
     width: inherit;
 
 }
-.fab{
+
+.fab {
     position: fixed;
     right: 5%;
-    bottom:80px;
+    bottom: 80px;
 }
 
-.fabItem{
-    color:#7d7d7d !important;
+.fabItem {
+    color: #7d7d7d !important;
 }
 
 .carddemoBasicUsage md-card {
     min-height: 150px;
 }
-.contentBtn{
-    color:#838383;
+
+.contentBtn {
+    color: #838383;
 }
-body{
+
+body {
     font-family: '微软雅黑', '黑体', Tahoma, Verdana, STHeiTi, simsun, sans-serif;
 }
-p{
+
+p {
     line-height: 30px;
 }
+
+/*.dialogdemoBasicUsage #popupContainer {*/
+    /*position: relative;*/
+/*}*/

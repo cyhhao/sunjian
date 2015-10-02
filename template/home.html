@@ -5,7 +5,7 @@
     <title></title>
 
     <link rel="stylesheet"
-          href="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.0/angular-material.min.css">
+          href="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.1/angular-material.min.css">
     <link rel="stylesheet" href="/static/css/default.css">
 </head>
 <body ng-app="app">
@@ -98,13 +98,13 @@
 <!--  FAB  -->
 
 
-<div class="fab" id="fab" ng-controller="DemoCtrl as demo" layout="column">
+<div class="fab" id="fab" ng-controller="FABCtrl as fab" layout="column">
     <md-content class="md-padding" layout="column">
         <div class="lock-size" layout="row" layout-align="center center">
-            <md-fab-speed-dial md-open="demo.isOpen" md-direction="{`demo.selectedDirection`}"
-                               ng-class="demo.selectedMode">
+            <md-fab-speed-dial md-open="fab.isOpen" md-direction="{`fab.selectedDirection`}"
+                               ng-class="fab.selectedMode">
                 <md-fab-trigger>
-                    <md-button aria-label="menu" class="md-fab md-warn" onDblClick="$('html,body').animate({scrollTop : '0px'}, 200);">
+                    <md-button aria-label="menu" class="md-fab md-warn" style="background-color: #42bd41" onDblClick="$('html,body').animate({scrollTop : '0px'}, 200);">
                         <md-icon md-svg-src="/static/img/icons/menu.svg"></md-icon>
                         <md-tooltip>
                             双击返回顶部
@@ -119,9 +119,12 @@
                             twitter
                         </md-tooltip>
                     </md-button>
-                    <md-button aria-label="Facebook" class="md-fab md-raised md-mini">
-                        <md-icon md-svg-src="/static/img/icons/facebook.svg" aria-label="Facebook"
+                    <md-button id="LoginBtn" aria-label="login" class="md-fab md-raised md-mini" ng-click="showAdvanced($event)">
+                        <md-icon md-svg-src="/static/img/icons/ic_account_circle_24px.svg" aria-label="Facebook"
                                  class="fabItem"></md-icon>
+                        <md-tooltip>
+                            登陆
+                        </md-tooltip>
                     </md-button>
                     <md-button aria-label="Google Hangout" class="md-fab md-raised md-mini">
                         <md-icon md-svg-src="/static/img/icons/ic_add_circle_black_24px.svg" aria-label="添加文章"
@@ -135,7 +138,11 @@
         </div>
     </md-content>
 </div>
-
+<a href="#/login">login</a>
+<div ng-app="login">
+    <h1>ITITIT</h1>
+    <div ng-view></div>
+</div>
 
 <!-- End  FAB  -->
 
@@ -149,117 +156,21 @@
 
 <script src="/static/js/jquery-2.1.4.min.js"></script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-animate.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-aria.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-animate.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-aria.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-messages.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-route.min.js"></script>
 
 <!-- Angular Material Javascript now available via Google CDN; version 0.10 used here -->
 <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.1/angular-material.min.js"></script>
+<!--<script src="/static/js/angular-route.js"></script>-->
+<script src="/static/js/homePage.js"></script>
+
+
 
 <script>
-    (function () {
-        angular.module('app', ['ngMaterial'])
-                .controller('SearchCtrl', SearchCtrl)
-                .controller('CardCtrl', CardCtrl)
-                .controller('DemoCtrl', DemoCtrl)
-                .config(function ($mdThemingProvider, $interpolateProvider) {
-                    $mdThemingProvider.theme('default')
-                            .primaryPalette('blue')
-                            .accentPalette('orange');
-                    $interpolateProvider.startSymbol('{`');
-                    $interpolateProvider.endSymbol('`}');
-                });
-        function SearchCtrl($timeout, $q, $log) {
-            var self = this;
-            self.simulateQuery = false;
-            self.isDisabled = false;
-            // list of `state` value/display objects
-            self.states = loadAll();
-            self.querySearch = querySearch;
-            self.selectedItemChange = selectedItemChange;
-            self.searchTextChange = searchTextChange;
-            // ******************************
-            // Internal methods
-            // ******************************
-            /**
-             * Search for states... use $timeout to simulate
-             * remote dataservice call.
-             */
-            function querySearch(query) {
-                var results = query ? self.states.filter(createFilterFor(query)) : self.states,
-                        deferred;
-                if (self.simulateQuery) {
-                    deferred = $q.defer();
-                    $timeout(function () {
-                        deferred.resolve(results);
-                    }, Math.random() * 1000, false);
-                    return deferred.promise;
-                } else {
-                    return results;
-                }
-            }
 
-            function searchTextChange(text) {
-                $log.info('Text changed to ' + text);
-            }
-
-            function selectedItemChange(item) {
-                $log.info('Item changed to ' + JSON.stringify(item));
-            }
-
-            /**
-             * Build `states` list of key/value pairs
-             */
-            function loadAll() {
-                var allStates = 'Alabama, Alaska, Arizona, Arkansas, California, Colorado, Connecticut, Delaware,\
-              Florida, Georgia, Hawaii, Idaho, Illinois, Indiana, Iowa, Kansas, Kentucky, Louisiana,\
-              Maine, Maryland, Massachusetts, Michigan, Minnesota, Mississippi, Missouri, Montana,\
-              Nebraska, Nevada, New Hampshire, New Jersey, New Mexico, New York, North Carolina,\
-              North Dakota, Ohio, Oklahoma, Oregon, Pennsylvania, Rhode Island, South Carolina,\
-              South Dakota, Tennessee, Texas, Utah, Vermont, Virginia, Washington, West Virginia,\
-              Wisconsin, Wyoming';
-                return allStates.split(/, +/g).map(function (state) {
-                    return {
-                        value: state.toLowerCase(),
-                        display: state
-                    };
-                });
-            }
-
-            /**
-             * Create filter function for a query string
-             */
-            function createFilterFor(query) {
-                var lowercaseQuery = angular.lowercase(query);
-                return function filterFn(state) {
-                    return (state.value.indexOf(lowercaseQuery) === 0);
-                };
-            }
-        }
-
-//        var contentNG = angular.module('content', ['ngMaterial']);
-//        contentNG.config(function ($mdThemingProvider, $interpolateProvider) {
-//            $mdThemingProvider.theme('default')
-//                    .primaryPalette('blue')
-//                    .accentPalette('orange');
-//            $interpolateProvider.startSymbol('{`');
-//            $interpolateProvider.endSymbol('`}');
-//        });
-        function CardCtrl($scope) {
-            $scope.imagePath = '/static/img/286342.jpg';
-        }
-
-        function DemoCtrl() {
-//            this.topDirections = ['left', 'up'];
-//            this.bottomDirections = ['down', 'right'];
-            this.isOpen = false;
-//            this.availableModes = ['md-fling', 'md-scale'];
-            this.selectedMode = 'md-scale';
-//            this.availableDirections = ['up', 'down', 'left', 'right'];
-            this.selectedDirection = 'up';
-        }
-    })();
 
 </script>
 
