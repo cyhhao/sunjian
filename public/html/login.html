@@ -4,7 +4,7 @@
             <div class="md-toolbar-tools">
                 <h2>登陆</h2>
                 <span flex></span>
-                <md-button class="md-icon-button" ng-click="answer('not applicable')">
+                <md-button class="md-icon-button" ng-click="answer('close')">
                     <md-icon md-svg-src="/static/img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
                 </md-button>
             </div>
@@ -26,10 +26,10 @@
             </div>
         </md-dialog-content>
         <div class="md-actions" layout="row" layout-align="center center">
-            <md-button class="" ng-click="answer('not useful')">
+            <md-button class="" ng-click="answer('cancel')">
                 取消
             </md-button>
-            <md-button class="green" ng-click="answer('useful')" style="color: #ffffff">
+            <md-button class="green" ng-click="answer('ok')" style="color: #ffffff">
                 登陆
             </md-button>
         </div>

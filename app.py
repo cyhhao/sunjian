@@ -1,7 +1,7 @@
 import tornado.ioloop
 import tornado.web
 from settings import settings
-from route.route import urls
+from route.All import urls
 
 __author__ = 'cyh'
 

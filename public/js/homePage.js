@@ -2,13 +2,13 @@
  * Created by cyh on 2015/9/24.
  */
 (function () {
-    angular.module('app', ['ngMaterial', 'ngRoute'])
+    var app = angular.module('app', ['ngMaterial', 'ngRoute'],solution)
         .controller('SearchCtrl', SearchCtrl)
         .controller('CardCtrl', CardCtrl)
         .controller('FABCtrl', FABCtrl)
         .config(function ($mdThemingProvider, $interpolateProvider, $routeProvider) {
             $mdThemingProvider.theme('default')
-                .primaryPalette('green',{
+                .primaryPalette('green', {
                     'default': '600'
                 })
                 .accentPalette('orange');
@@ -18,6 +18,12 @@
                 //.when('/login', {templateUrl: '/static/html/login_script.html'})
                 .when('/', {templateUrl: '/html/empty'});
         });
+    app.factory("LoginStatu", function () {
+        return {
+            type: 0,
+            name: ""
+        }
+    });
     function SearchCtrl($timeout, $q, $log) {
         var self = this;
         self.simulateQuery = false;
@@ -109,7 +115,7 @@
                     console.log('You cancelled the dialog.');
                 });
         };
-        function DialogController($scope, $mdDialog) {
+        function DialogController($scope, $mdDialog, $http) {
             $scope.hide = function () {
                 $mdDialog.hide();
             };
@@ -117,12 +123,24 @@
                 $mdDialog.cancel();
             };
             $scope.answer = function (answer) {
-                $mdDialog.hide(answer);
+                if (answer == "ok") {
+                    //alert(getCookie('_xsrf'));
+                    $http.post('/ajax/login',{
+                        user:$scope.user.username,
+                        password:$scope.user.password,
+                        _xsrf:getCookie('_xsrf')
+                    }).success(function (data) {
+                        alert(data);
+                    });
+                }
             };
-            $scope.user={
-                firstName:""
-            }
+
         }
+    }
+
+    window.getCookie=function(name) {
+        var r =document.cookie.match("\\b" + name + "=([^;]*)\\b");
+        return r ? r[1] : undefined;
     }
 
 
