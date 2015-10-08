@@ -8,7 +8,9 @@
         .controller('FABCtrl', FABCtrl)
         .config(function ($mdThemingProvider, $interpolateProvider, $routeProvider) {
             $mdThemingProvider.theme('default')
-                .primaryPalette('blue')
+                .primaryPalette('green',{
+                    'default': '600'
+                })
                 .accentPalette('orange');
             $interpolateProvider.startSymbol('{`');
             $interpolateProvider.endSymbol('`}');
@@ -117,6 +119,9 @@
             $scope.answer = function (answer) {
                 $mdDialog.hide(answer);
             };
+            $scope.user={
+                firstName:""
+            }
         }
     }
 

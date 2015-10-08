@@ -1,32 +1,39 @@
-<md-dialog aria-label="Mango (Fruit)">
-  <form>
-  <md-toolbar>
-    <div class="md-toolbar-tools">
-      <h2>登陆</h2>
-      <span flex></span>
-      <md-button class="md-icon-button" ng-click="answer('not applicable')">
-          <md-icon md-svg-src="/static/img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
-      </md-button>
-    </div>
-  </md-toolbar>
-  <md-dialog-content style="max-width:800px;max-height:810px; ">
-    <div>
-
-    </div>
-  </md-dialog-content>
-  <div class="md-actions" layout="row">
-    <md-button href="http://en.wikipedia.org/wiki/Mango" target="_blank" hide show-md>
-      More on Wikipedia
-    </md-button>
-    <span flex></span>
-    <md-button ng-click="answer('not useful')">
-     Not Useful
-    </md-button>
-    <md-button ng-click="answer('useful')" style="margin-right:20px;">
-      Useful
-    </md-button>
-  </div>
-  </form>
+<md-dialog aria-label="Login" style="width: 30%">
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>登陆</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="answer('not applicable')">
+                    <md-icon md-svg-src="/static/img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content layout="cloumn" layout-align="center center" style="max-width:800px;max-height:810px;min-height: 200px" >
+            <div flex="60" style="min-height: 80px;margin:20px">
+                <md-input-container class="md-icon-float">
+                    <label>用户名</label>
+                    <md-icon class="contentBtn" md-svg-src="/static/img/icons/ic_perm_identity_24px.svg"></md-icon>
+                    <input type="user" ng-model="user.username">
+                </md-input-container>
+            </div>
+            <div flex="60" style="min-height: 80px;margin:20px">
+                <md-input-container class="md-icon-float">
+                    <label>密码</label>
+                    <md-icon class="contentBtn" md-svg-src="/static/img/icons/ic_lock_open_24px.svg"></md-icon>
+                    <input type="password" ng-model="user.password">
+                </md-input-container>
+            </div>
+        </md-dialog-content>
+        <div class="md-actions" layout="row" layout-align="center center">
+            <md-button class="" ng-click="answer('not useful')">
+                取消
+            </md-button>
+            <md-button class="green" ng-click="answer('useful')" style="color: #ffffff">
+                登陆
+            </md-button>
+        </div>
+    </form>
 </md-dialog>
 
 

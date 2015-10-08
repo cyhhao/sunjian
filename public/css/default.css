@@ -79,13 +79,25 @@
 }
 
 body {
-    font-family: '微软雅黑', '黑体', Tahoma, Verdana, STHeiTi, simsun, sans-serif;
+    font-family: '微软雅黑', '黑体', Tahoma, Verdana, STHeiTi, simsun, sans-serif !important;
 }
 
 p {
     line-height: 30px;
 }
 
+.green {
+    background-color: #42bd41 !important;
+}
+
+.green_font {
+    color: #42bd41 !important;
+}
+
+.white_font {
+    color: #ffffff !important;
+}
+
 /*.dialogdemoBasicUsage #popupContainer {*/
-    /*position: relative;*/
+/*position: relative;*/
 /*}*/

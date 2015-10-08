@@ -5,7 +5,7 @@
     <title></title>
 
     <link rel="stylesheet"
-          href="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.1/angular-material.min.css">
+          href="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.2/angular-material.min.css">
     <link rel="stylesheet" href="/static/css/default.css">
 </head>
 <body ng-app="app">
@@ -98,13 +98,13 @@
 <!--  FAB  -->
 
 
-<div class="fab" id="fab" ng-controller="FABCtrl as fab" layout="column">
+<div class="fab" id="fab" ng-controller="FABCtrl as fab" layout="column" ng-mouseleave="fab.isOpen=false">
     <md-content class="md-padding" layout="column">
         <div class="lock-size" layout="row" layout-align="center center">
             <md-fab-speed-dial md-open="fab.isOpen" md-direction="{`fab.selectedDirection`}"
                                ng-class="fab.selectedMode">
                 <md-fab-trigger>
-                    <md-button aria-label="menu" class="md-fab md-warn" style="background-color: #42bd41" onDblClick="$('html,body').animate({scrollTop : '0px'}, 200);">
+                    <md-button aria-label="menu" class="md-fab md-warn green" onDblClick="$('html,body').animate({scrollTop : '0px'}, 200);" ng-mouseenter="fab.isOpen=true">
                         <md-icon md-svg-src="/static/img/icons/menu.svg"></md-icon>
                         <md-tooltip>
                             双击返回顶部
@@ -138,11 +138,7 @@
         </div>
     </md-content>
 </div>
-<a href="#/login">login</a>
-<div ng-app="login">
-    <h1>ITITIT</h1>
-    <div ng-view></div>
-</div>
+
 
 <!-- End  FAB  -->
 
@@ -156,14 +152,14 @@
 
 <script src="/static/js/jquery-2.1.4.min.js"></script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-animate.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-aria.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-messages.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-route.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-animate.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-aria.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-messages.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-route.min.js"></script>
 
 <!-- Angular Material Javascript now available via Google CDN; version 0.10 used here -->
-<script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.1/angular-material.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.2/angular-material.min.js"></script>
 <!--<script src="/static/js/angular-route.js"></script>-->
 <script src="/static/js/homePage.js"></script>
 
