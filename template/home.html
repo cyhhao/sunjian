@@ -95,9 +95,8 @@
 </div>
 <!-- End 正文  -->
 
+
 <!--  FAB  -->
-
-
 <div class="fab" id="fab" ng-controller="FABCtrl as fab" layout="column" ng-mouseleave="fab.isOpen=false">
     <md-content class="md-padding" layout="column">
         <div class="lock-size" layout="row" layout-align="center center">
@@ -112,27 +111,15 @@
                     </md-button>
                 </md-fab-trigger>
                 <md-fab-actions>
-                    <md-button aria-label="Twitter" class="md-fab md-raised md-mini">
-                        <md-icon md-svg-src="/static/img/icons/twitter.svg" aria-label="Twitter"
+
+                    <md-button ng-repeat="btn in btns" class="md-fab md-raised md-mini" aria-label="{`btn.label`}" ng-click="btn.func($event)">
+                        <md-icon md-svg-src="{`btn.ico_url`}" aria-label="{`btn.label`}"
                                  class="fabItem"></md-icon>
                         <md-tooltip>
-                            twitter
+                            {`btn.label`}
                         </md-tooltip>
                     </md-button>
-                    <md-button id="LoginBtn" aria-label="login" class="md-fab md-raised md-mini" ng-click="showAdvanced($event)">
-                        <md-icon md-svg-src="/static/img/icons/ic_account_circle_24px.svg" aria-label="Facebook"
-                                 class="fabItem"></md-icon>
-                        <md-tooltip>
-                            登陆
-                        </md-tooltip>
-                    </md-button>
-                    <md-button aria-label="Google Hangout" class="md-fab md-raised md-mini">
-                        <md-icon md-svg-src="/static/img/icons/ic_add_circle_black_24px.svg" aria-label="添加文章"
-                                 class="fabItem"></md-icon>
-                        <md-tooltip>
-                            添加文章
-                        </md-tooltip>
-                    </md-button>
+
                 </md-fab-actions>
             </md-fab-speed-dial>
         </div>

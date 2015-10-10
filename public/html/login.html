@@ -9,21 +9,24 @@
                 </md-button>
             </div>
         </md-toolbar>
-        <md-dialog-content layout="cloumn" layout-align="center center" style="max-width:800px;max-height:810px;min-height: 200px" >
-            <div flex="60" style="min-height: 80px;margin:20px">
+        <md-dialog-content layout="column" layout-align="center center"
+                           style="max-width:800px;max-height:810px;min-height: 200px">
+            <div flex="60" style="min-height: 80px">
                 <md-input-container class="md-icon-float">
                     <label>用户名</label>
                     <md-icon class="contentBtn" md-svg-src="/static/img/icons/ic_perm_identity_24px.svg"></md-icon>
                     <input type="user" ng-model="user.username">
                 </md-input-container>
             </div>
-            <div flex="60" style="min-height: 80px;margin:20px">
+            <div flex="60" style="min-height: 80px">
                 <md-input-container class="md-icon-float">
                     <label>密码</label>
                     <md-icon class="contentBtn" md-svg-src="/static/img/icons/ic_lock_open_24px.svg"></md-icon>
                     <input type="password" ng-model="user.password">
                 </md-input-container>
             </div>
+            <md-progress-circular class="md-hue-2 {`loading`}" md-mode="indeterminate"
+                                  md-diameter="30"></md-progress-circular>
         </md-dialog-content>
         <div class="md-actions" layout="row" layout-align="center center">
             <md-button class="" ng-click="answer('cancel')">

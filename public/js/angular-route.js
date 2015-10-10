@@ -231,7 +231,7 @@ function $RouteProvider() {
    * @name $routeProvider#otherwise
    *
    * @description
-   * Sets route definition that will be used on route change when no other route definition
+   * Sets route definition that will be used on route changed when no other route definition
    * is matched.
    *
    * @param {Object|string} params Mapping information to be assigned to `$route.current`.
@@ -392,13 +392,13 @@ function $RouteProvider() {
      * @name $route#$routeChangeStart
      * @eventType broadcast on root scope
      * @description
-     * Broadcasted before a route change. At this  point the route services starts
-     * resolving all of the dependencies needed for the route change to occur.
+     * Broadcasted before a route changed. At this  point the route services starts
+     * resolving all of the dependencies needed for the route changed to occur.
      * Typically this involves fetching the view template as well as any dependencies
      * defined in `resolve` route property. Once  all of the dependencies are resolved
      * `$routeChangeSuccess` is fired.
      *
-     * The route change (and the `$location` change that triggered it) can be prevented
+     * The route changed (and the `$location` changed that triggered it) can be prevented
      * by calling `preventDefault` method of the event. See {@link ng.$rootScope.Scope#$on}
      * for more details about event object.
      *
@@ -612,7 +612,7 @@ function $RouteProvider() {
               return $q.all(locals);
             }
           }).
-          // after route change
+          // after route changed
           then(function(locals) {
             if (nextRoute == $route.current) {
               if (nextRoute) {
@@ -689,9 +689,9 @@ ngRouteModule.provider('$routeParams', $RouteParamsProvider);
  * In case of parameter name collision, `path` params take precedence over `search` params.
  *
  * The service guarantees that the identity of the `$routeParams` object will remain unchanged
- * (but its properties will likely change) even when a route change occurs.
+ * (but its properties will likely changed) even when a route changed occurs.
  *
- * Note that the `$routeParams` are only updated *after* a route change completes successfully.
+ * Note that the `$routeParams` are only updated *after* a route changed completes successfully.
  * This means that you cannot rely on `$routeParams` being correct in route resolve functions.
  * Instead you can use `$route.current.params` to access the new route's parameters.
  *
@@ -931,7 +931,7 @@ function ngViewFactory($route, $anchorScroll, $animate) {
             var current = $route.current;
 
             // Note: This will also link all children of ng-view that were contained in the original
-            // html. If that content contains controllers, ... they could pollute/change the scope.
+            // html. If that content contains controllers, ... they could pollute/changed the scope.
             // However, using ng-view on an element with additional content does not make sense...
             // Note: We can't remove them in the cloneAttchFn of $transclude as that
             // function is called before linking the content, which would apply child

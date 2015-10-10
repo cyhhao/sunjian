@@ -2,7 +2,7 @@
  * Created by cyh on 2015/9/24.
  */
 (function () {
-    var app = angular.module('app', ['ngMaterial', 'ngRoute'],solution)
+    var app = angular.module('app', ['ngMaterial', 'ngRoute'], solution)
         .controller('SearchCtrl', SearchCtrl)
         .controller('CardCtrl', CardCtrl)
         .controller('FABCtrl', FABCtrl)
@@ -21,7 +21,14 @@
     app.factory("LoginStatu", function () {
         return {
             type: 0,
-            name: ""
+            name: "",
+            changefuncs:[],
+            changed: function () {
+                for(var i=0;i<this.changefuncs.length;i++){
+                    this.changefuncs[i]();
+                }
+
+            }
         }
     });
     function SearchCtrl($timeout, $q, $log) {
@@ -96,7 +103,7 @@
         $scope.imagePath = '/static/img/286342.jpg';
     }
 
-    function FABCtrl($scope, $mdDialog) {
+    function FABCtrl($scope, $mdDialog, LoginStatu) {
         this.isOpen = false;
         this.selectedMode = 'md-scale';
         this.selectedDirection = 'up';
@@ -115,31 +122,108 @@
                     console.log('You cancelled the dialog.');
                 });
         };
-        function DialogController($scope, $mdDialog, $http) {
-            $scope.hide = function () {
-                $mdDialog.hide();
-            };
-            $scope.cancel = function () {
-                $mdDialog.cancel();
-            };
-            $scope.answer = function (answer) {
-                if (answer == "ok") {
-                    //alert(getCookie('_xsrf'));
-                    $http.post('/ajax/login',{
-                        user:$scope.user.username,
-                        password:$scope.user.password,
-                        _xsrf:getCookie('_xsrf')
-                    }).success(function (data) {
-                        alert(data);
-                    });
-                }
-            };
+        var UnLogin = [
+            {
+                label: "关于",
+                ico_url: "/static/img/icons/ic_info_24px.svg",
+                func: ''
+            },
+            {
+                label: "登陆",
+                ico_url: "/static/img/icons/ic_account_circle_24px.svg",
+                func: $scope.showAdvanced
+            },
+            {
+                label: "分享",
+                ico_url: "/static/img/icons/ic_share_24px.svg",
+                func: ''
+            }
+        ];
+        var MyAccount = [
+            {
+                label: "登出",
+                ico_url: "/static/img/icons/ic_exit_to_app_24px.svg",
+                func: ""
+            },
+            {
+                label: "我的订阅",
+                ico_url: "/static/img/icons/ic_bookmark_24px.svg",
+                func: ""
+            },
+            {
+                label: "后台设置",
+                ico_url: "/static/img/icons/ic_settings_24px.svg",
+                func: ""
+            },
+            {
+                label: "添加文章",
+                ico_url: "/static/img/icons/ic_add_circle_black_24px.svg",
+                func: ""
+            }
+        ];
+        LoginStatu.changefuncs.push(function () {
+            if (LoginStatu.type == 0) {
+                $scope.btns = UnLogin;
+            }
+            else {
+                $scope.btns = MyAccount;
+            }
+        });
+        LoginStatu.changed();
 
-        }
     }
 
-    window.getCookie=function(name) {
-        var r =document.cookie.match("\\b" + name + "=([^;]*)\\b");
+    function DialogController($scope, $mdDialog, $http, $mdToast, LoginStatu) {
+        $scope.loading = 'ng-hide';
+        $scope.hide = function () {
+            $mdDialog.hide();
+        };
+        $scope.cancel = function () {
+            $mdDialog.cancel();
+        };
+        $scope.answer = function (answer) {
+            if (answer == "ok") {
+                //alert(getCookie('_xsrf'));
+                $scope.loading = '';
+                $http.post('/ajax/login', {
+                    user: $scope.user.username,
+                    password: $scope.user.password,
+                    _xsrf: getCookie('_xsrf')
+                }).success(function (data) {
+                    $scope.loading = 'ng-hide';
+                    if (data.code == 1) {
+                        $mdToast.show(
+                            $mdToast.simple()
+                                .content('登陆成功')
+                                .position('top right')
+                                .hideDelay(3000)
+                        );
+                        LoginStatu.type = 1;
+                        LoginStatu.changed();
+                    }
+                    else {
+                        $mdDialog.show(
+                            $mdDialog.alert()
+                                .clickOutsideToClose(true)
+                                .title('登陆')
+                                .content(data.msg)
+                                .ok('知道了')
+                        );
+                    }
+                    $mdDialog.hide();
+                }).error(function () {
+                    $scope.loading = 'ng-hide';
+                });
+            }
+            else {
+                $mdDialog.cancel();
+            }
+        };
+
+    }
+
+    window.getCookie = function (name) {
+        var r = document.cookie.match("\\b" + name + "=([^;]*)\\b");
         return r ? r[1] : undefined;
     }
 
