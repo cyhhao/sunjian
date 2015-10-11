@@ -18,17 +18,32 @@
                 //.when('/login', {templateUrl: '/static/html/login_script.html'})
                 .when('/', {templateUrl: '/html/empty'});
         });
-    app.factory("LoginStatu", function () {
+    app.factory("LoginStatu", function ($http) {
         return {
             type: 0,
             name: "",
-            changefuncs:[],
+            host: "",
+            changefuncs: [],
             changed: function () {
-                for(var i=0;i<this.changefuncs.length;i++){
+                for (var i = 0; i < this.changefuncs.length; i++) {
                     this.changefuncs[i]();
                 }
-
+            },
+            getStatu: function () {
+                $http.get('/ajax/getStatu').success(function (it) {
+                    return function (data) {
+                        if (data.code == 1) {
+                            console.log("this: " + it.type);
+                            it.type = data.data['type'];
+                            it.name = data.data['name'];
+                            console.log("ajax ok");
+                            console.log(it.changefuncs);
+                            it.changed();
+                        }
+                    }
+                }(this));
             }
+
         }
     });
     function SearchCtrl($timeout, $q, $log) {
@@ -99,11 +114,21 @@
         }
     }
 
-    function CardCtrl($scope) {
+    function CardCtrl($scope, LoginStatu, $http) {
         $scope.imagePath = '/static/img/286342.jpg';
+        LoginStatu.changefuncs.push(function () {
+            if (LoginStatu.type == 1) {
+                $scope.isEdit = "";
+            }
+            else {
+                $scope.isEdit = "ng-hide";
+            }
+        });
+        console.log("card ok");
+
     }
 
-    function FABCtrl($scope, $mdDialog, LoginStatu) {
+    function FABCtrl($scope, $mdDialog, LoginStatu,$http,$mdToast) {
         this.isOpen = false;
         this.selectedMode = 'md-scale';
         this.selectedDirection = 'up';
@@ -121,6 +146,24 @@
                 }, function () {
                     console.log('You cancelled the dialog.');
                 });
+        };
+        $scope.logout = function () {
+            $http.post('/ajax/logout',{
+                _xsrf: getCookie('_xsrf')
+            }).success(function (data) {
+                if (data.code == 1) {
+                    $mdToast.show(
+                        $mdToast.simple()
+                            .content('登出完成')
+                            .position('top right')
+                            .hideDelay(3000)
+                    );
+                    LoginStatu.type = 0;
+                    LoginStatu.name="";
+                    LoginStatu.changed();
+                }
+            });
+
         };
         var UnLogin = [
             {
@@ -143,7 +186,7 @@
             {
                 label: "登出",
                 ico_url: "/static/img/icons/ic_exit_to_app_24px.svg",
-                func: ""
+                func: $scope.logout
             },
             {
                 label: "我的订阅",
@@ -169,8 +212,8 @@
                 $scope.btns = MyAccount;
             }
         });
-        LoginStatu.changed();
-
+        console.log("FAB ok");
+        LoginStatu.getStatu();
     }
 
     function DialogController($scope, $mdDialog, $http, $mdToast, LoginStatu) {
@@ -183,7 +226,6 @@
         };
         $scope.answer = function (answer) {
             if (answer == "ok") {
-                //alert(getCookie('_xsrf'));
                 $scope.loading = '';
                 $http.post('/ajax/login', {
                     user: $scope.user.username,
@@ -199,6 +241,7 @@
                                 .hideDelay(3000)
                         );
                         LoginStatu.type = 1;
+                        LoginStatu.name=$scope.user.username;
                         LoginStatu.changed();
                     }
                     else {

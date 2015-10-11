@@ -40,7 +40,7 @@
 <!--End -- 搜索框-->
 <!--  正文  -->
 <div layout="row" layout-align="center center">
-    <div ng-controller="CardCtrl" flex="60">
+    <div ng-controller="CardCtrl as ctrl" flex="60">
         <md-content class="md-padding">
             <md-card>
                 <md-card-content>
@@ -57,7 +57,7 @@
                         <md-icon md-svg-src="/static/img/icons/ic_visibility_24px.svg" class="fabItem"></md-icon>
                         阅读
                     </md-button>
-                    <md-button>
+                    <md-button class="{`isEdit`}">
                         <md-icon md-svg-src="/static/img/icons/ic_mode_edit_24px.svg" class="fabItem"></md-icon>
                         编辑
 
