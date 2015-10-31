@@ -1,4 +1,4 @@
-from main.MainPage import MainPage, empty
+from main.MainPage import MainPage, empty, EditPage
 from route import ajax
 
 __author__ = 'cyh'
