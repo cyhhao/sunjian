@@ -3,6 +3,7 @@
  */
 (function () {
     var app = angular.module('app', ['ngMaterial', 'ngRoute'], solution)
+        .controller('ProgressCtrl', ProgressCtrl)
         .controller('SearchCtrl', SearchCtrl)
         .controller('CardCtrl', CardCtrl)
         .controller('FABCtrl', FABCtrl)
@@ -46,6 +47,15 @@
 
         }
     });
+    function ProgressCtrl($scope){
+        $scope.progressValue=0;
+        $scope.progressShow='';
+        $scope.loading=function(value){
+            $scope.progressValue=value;
+            if(value==100) $scope.progressShow='ng-hide';
+        }
+    }
+
     function SearchCtrl($timeout, $q, $log) {
         var self = this;
         self.simulateQuery = false;
@@ -125,7 +135,7 @@
             }
         });
         console.log("card ok");
-
+        $scope.loading(50);
     }
 
     function FABCtrl($scope, $mdDialog, LoginStatu,$http,$mdToast) {
@@ -214,6 +224,7 @@
         });
         console.log("FAB ok");
         LoginStatu.getStatu();
+        //$scope.loading(90);
     }
 
     function DialogController($scope, $mdDialog, $http, $mdToast, LoginStatu) {

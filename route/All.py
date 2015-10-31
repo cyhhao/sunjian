@@ -5,5 +5,6 @@ __author__ = 'cyh'
 
 urls = [
     (r"/", MainPage),
+    (r"/edit/([0-9]+)", EditPage),
     (r"/html/empty", empty),
 ]+ajax.urls

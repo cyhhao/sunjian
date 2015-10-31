@@ -8,8 +8,8 @@
           href="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.2/angular-material.min.css">
     <link rel="stylesheet" href="/static/css/default.css">
 </head>
-<body ng-app="app" csrf="{{ xsrf_form_html() }}">
-
+<body ng-app="app" csrf="{{ xsrf_form_html() }}" ng-controller="ProgressCtrl">
+<md-progress-linear class="{`progressShow||'ng-hide'`}" id="progress" md-mode="determinate" value="{`progressValue||0`}"></md-progress-linear>
 <!--搜索框-->
 <div id="search" layout="row" layout-align="center center" style="width:100%;padding-top: 20px">
     <div ng-controller="SearchCtrl as ctrl" flex="60">

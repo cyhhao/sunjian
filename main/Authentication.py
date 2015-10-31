@@ -8,7 +8,6 @@ __author__ = 'cyh'
 
 
 class Login(BaseHandler):
-    # @tornado.web.authenticated
     def post(self):
         user = self.get_argument('user')
         password = self.get_argument('password')
