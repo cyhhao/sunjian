@@ -8,6 +8,6 @@ __author__ = 'cyh'
 application = tornado.web.Application(urls, **settings)
 
 if __name__ == "__main__":
-    application.listen(8080)
+    application.listen(80)
     tornado.ioloop.IOLoop.instance().start()
     print "start ok"
