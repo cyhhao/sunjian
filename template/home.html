@@ -101,7 +101,7 @@
 <div class="fab" id="fab" ng-controller="FABCtrl as fab" layout="column" ng-mouseleave="fab.isOpen=false">
     <md-content class="md-padding" layout="column">
         <div class="lock-size" layout="row" layout-align="center center">
-            <md-fab-speed-dial md-open="fab.isOpen" md-direction="{`fab.selectedDirection`}"
+            <md-fab-speed-dial md-open="fab.isOpen" md-direction="up"
                                ng-class="fab.selectedMode">
                 <md-fab-trigger>
                     <md-button aria-label="menu" class="md-fab md-warn green" onDblClick="$('html,body').animate({scrollTop : '0px'}, 200);" ng-mouseenter="fab.isOpen=true">
